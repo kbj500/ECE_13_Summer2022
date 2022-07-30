@@ -6,3 +6,6 @@ Bijaya Khadka
 28,48,249,23,189
 23,28,48,249,189
 23,28,48,249,189
+
+Changes made to following lines of part1_template.c
+15,17,19,20,22,30,35
