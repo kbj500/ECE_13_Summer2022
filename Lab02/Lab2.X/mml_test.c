@@ -40,7 +40,7 @@ int main ()
   float identity_matrix[3][3] = { {1, 0, 0}, {0, 1, 0}, {0, 0, 1} };
   float out_matrix[3][3];
 
-  /* varaibles for each function (except MatrixPrint), to count # of tests passed */
+  /* variables for each function (except MatrixPrint), to count # of tests passed */
   int eqPass = 0;
   int addPass = 0;
   int mulPass = 0;
@@ -61,7 +61,8 @@ int main ()
       }
   }
 
-
+ printf("%f",MatrixTrace(sample1_matrix));
+ 
 /******************************************************************************
  * Matrix Print Check:
  *****************************************************************************/
@@ -468,9 +469,9 @@ int main ()
 
   /* Check trace on identity_matrix */
   printf ("Operation: compute trace of identity matrix\n");
-  printf ("Output:%f\n", MatrixTrace (identity_matrix));
+  printf ("Output:%f\n", MatrixTrace(identity_matrix));
   printf ("Expected output:%f\n", 3.000000);
-  if (MatrixTrace (identity_matrix) == 3.000000)
+  if (MatrixTrace(identity_matrix) == 3.000000)
     {
       tracePass++;
     }
@@ -480,9 +481,9 @@ int main ()
 
   /* Check trace on zero_matrix */
   printf ("Operation: compute trace of sample1 matrix\n");
-  printf ("Output:%f\n", MatrixTrace (sample1_matrix));
+  printf("Output:%f\n",MatrixTrace(sample1_matrix));
   printf ("Expected output:%f\n", 12.000000);
-  if (MatrixTrace (sample1_matrix) == 12.000000)
+  if (MatrixTrace(sample1_matrix) == 12.000000)
     {
       tracePass++;
     }
@@ -492,9 +493,9 @@ int main ()
 
   /* Check trace on zero_matrix */
   printf ("Operation: compute trace of sample2 matrix\n");
-  printf ("Output:%f\n", MatrixTrace (sample2_matrix));
+  printf ("Output:%f\n", MatrixTrace(sample2_matrix));
   printf ("Expected output:%f\n", -16.000000);
-  if (MatrixTrace (sample2_matrix) == -16.000000)
+  if (MatrixTrace(sample2_matrix) == -16.000000)
     {
       tracePass++;
     }
@@ -724,7 +725,7 @@ int main ()
 
   printf ("%d out of %d functions passed (%.2f%%).", functionsPassed, 9,
 	  (float) functionsPassed / 9 * 100.0);
-
+  
   BOARD_End ();
   while (1);
 

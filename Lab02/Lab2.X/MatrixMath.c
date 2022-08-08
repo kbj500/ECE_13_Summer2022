@@ -23,7 +23,6 @@ void MatrixPrint (float mat[DIM][DIM])
 int MatrixEquals (float mat1[DIM][DIM], float mat2[DIM][DIM])
 {
   int r, c;
-  float diff;
   for (r = 0; r < DIM; r++)
     {
       for (c = 0; c < DIM; c++)
@@ -104,7 +103,7 @@ void MatrixScalarMultiply (float x, float mat[DIM][DIM], float result[DIM][DIM])
 float MatrixTrace (float mat[DIM][DIM])
 {
   int r;
-  float trace;
+  float trace=0;
   for (r = 0; r < DIM; r++)
     {
       trace = trace + mat[r][r];
