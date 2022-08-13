@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/BOARD.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/sort.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/LinkedList.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/LinkedListTest.c
+SOURCEFILES_QUOTED_IF_SPACED=/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/BOARD.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/LinkedList.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/LinkedListTest.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/3130105/BOARD.o ${OBJECTDIR}/_ext/3130105/sort.o ${OBJECTDIR}/_ext/3130105/LinkedList.o ${OBJECTDIR}/_ext/3130105/LinkedListTest.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/3130105/BOARD.o.d ${OBJECTDIR}/_ext/3130105/sort.o.d ${OBJECTDIR}/_ext/3130105/LinkedList.o.d ${OBJECTDIR}/_ext/3130105/LinkedListTest.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/3130105/BOARD.o ${OBJECTDIR}/_ext/3130105/LinkedList.o ${OBJECTDIR}/_ext/3130105/LinkedListTest.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/3130105/BOARD.o.d ${OBJECTDIR}/_ext/3130105/LinkedList.o.d ${OBJECTDIR}/_ext/3130105/LinkedListTest.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/3130105/BOARD.o ${OBJECTDIR}/_ext/3130105/sort.o ${OBJECTDIR}/_ext/3130105/LinkedList.o ${OBJECTDIR}/_ext/3130105/LinkedListTest.o
+OBJECTFILES=${OBJECTDIR}/_ext/3130105/BOARD.o ${OBJECTDIR}/_ext/3130105/LinkedList.o ${OBJECTDIR}/_ext/3130105/LinkedListTest.o
 
 # Source Files
-SOURCEFILES=/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/BOARD.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/sort.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/LinkedList.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/LinkedListTest.c
+SOURCEFILES=/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/BOARD.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/LinkedList.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/LinkedListTest.c
 
 
 
@@ -113,12 +113,6 @@ ${OBJECTDIR}/_ext/3130105/BOARD.o: /Users/bijayakhadka/Documents/ECE_13/bkhadka/
 	@${RM} ${OBJECTDIR}/_ext/3130105/BOARD.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/_ext/3130105/BOARD.o.d" -o ${OBJECTDIR}/_ext/3130105/BOARD.o /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/_ext/3130105/sort.o: /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/sort.c  .generated_files/flags/default/eceecd18be6d155a559dc472d911fcdec6d42dc6 .generated_files/flags/default/b049a9946035c0d6f8c1361b9c30a33141c1b72d
-	@${MKDIR} "${OBJECTDIR}/_ext/3130105" 
-	@${RM} ${OBJECTDIR}/_ext/3130105/sort.o.d 
-	@${RM} ${OBJECTDIR}/_ext/3130105/sort.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/_ext/3130105/sort.o.d" -o ${OBJECTDIR}/_ext/3130105/sort.o /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/sort.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
 ${OBJECTDIR}/_ext/3130105/LinkedList.o: /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/LinkedList.c  .generated_files/flags/default/7481c990d9abdf08dbc91fbf2991b6dd7132abc2 .generated_files/flags/default/b049a9946035c0d6f8c1361b9c30a33141c1b72d
 	@${MKDIR} "${OBJECTDIR}/_ext/3130105" 
 	@${RM} ${OBJECTDIR}/_ext/3130105/LinkedList.o.d 
@@ -137,12 +131,6 @@ ${OBJECTDIR}/_ext/3130105/BOARD.o: /Users/bijayakhadka/Documents/ECE_13/bkhadka/
 	@${RM} ${OBJECTDIR}/_ext/3130105/BOARD.o.d 
 	@${RM} ${OBJECTDIR}/_ext/3130105/BOARD.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/_ext/3130105/BOARD.o.d" -o ${OBJECTDIR}/_ext/3130105/BOARD.o /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/_ext/3130105/sort.o: /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/sort.c  .generated_files/flags/default/2a22f9ca1b926e1631a773db45a891ec01b3cbd0 .generated_files/flags/default/b049a9946035c0d6f8c1361b9c30a33141c1b72d
-	@${MKDIR} "${OBJECTDIR}/_ext/3130105" 
-	@${RM} ${OBJECTDIR}/_ext/3130105/sort.o.d 
-	@${RM} ${OBJECTDIR}/_ext/3130105/sort.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/_ext/3130105/sort.o.d" -o ${OBJECTDIR}/_ext/3130105/sort.o /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/sort.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 ${OBJECTDIR}/_ext/3130105/LinkedList.o: /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab03/Lab3.X/LinkedList.c  .generated_files/flags/default/2553dc779a8661247bca9d4f2b9fb80d17a459e4 .generated_files/flags/default/b049a9946035c0d6f8c1361b9c30a33141c1b72d
 	@${MKDIR} "${OBJECTDIR}/_ext/3130105" 
@@ -169,12 +157,12 @@ endif
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 ${DISTDIR}/Lab3.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
 	@${MKDIR} ${DISTDIR} 
-	${MP_CC} $(MP_EXTRA_LD_PRE) -g -mdebugger -D__MPLAB_DEBUGGER_SIMULATOR=1 -mprocessor=$(MP_PROCESSOR_OPTION)  -o ${DISTDIR}/Lab3.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}          -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)      -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,-D=__DEBUG_D,--defsym=__MPLAB_DEBUGGER_SIMULATOR=1,--no-code-in-dinit,--no-dinit-in-serial-mem,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--memorysummary,${DISTDIR}/memoryfile.xml -mdfp="${DFP_DIR}"
+	${MP_CC} $(MP_EXTRA_LD_PRE) -g -mdebugger -D__MPLAB_DEBUGGER_SIMULATOR=1 -mprocessor=$(MP_PROCESSOR_OPTION)  -o ${DISTDIR}/Lab3.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}          -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)      -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,-D=__DEBUG_D,--defsym=__MPLAB_DEBUGGER_SIMULATOR=1,--defsym=_min_heap_size=13000,--no-code-in-dinit,--no-dinit-in-serial-mem,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--memorysummary,${DISTDIR}/memoryfile.xml -mdfp="${DFP_DIR}"
 	
 else
 ${DISTDIR}/Lab3.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
 	@${MKDIR} ${DISTDIR} 
-	${MP_CC} $(MP_EXTRA_LD_PRE)  -mprocessor=$(MP_PROCESSOR_OPTION)  -o ${DISTDIR}/Lab3.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}          -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--no-code-in-dinit,--no-dinit-in-serial-mem,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--memorysummary,${DISTDIR}/memoryfile.xml -mdfp="${DFP_DIR}"
+	${MP_CC} $(MP_EXTRA_LD_PRE)  -mprocessor=$(MP_PROCESSOR_OPTION)  -o ${DISTDIR}/Lab3.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}          -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=_min_heap_size=13000,--no-code-in-dinit,--no-dinit-in-serial-mem,-Map="${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map",--memorysummary,${DISTDIR}/memoryfile.xml -mdfp="${DFP_DIR}"
 	${MP_CC_DIR}/xc32-bin2hex ${DISTDIR}/Lab3.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} 
 endif
 
