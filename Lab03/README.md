@@ -32,6 +32,15 @@ This file includes a MPLAB project folder for the lab. Within the MPLAB project 
 INSTRUCTIONS
 
 This program is intended to be run using the MPLAB IDE and the PIC32 kit but doesn't require a PIC32 kit and can be compiled, built and executed using the Simulator.
+--------------
+
+STOP WATCH TIMES
+Target halted. Stopwatch cycle count = 198925 (198.925 ms)
+Target halted. Stopwatch cycle count = 48886 (48.886 ms)
+Target halted. Stopwatch cycle count = 597461 (597.461 ms)
+Target halted. Stopwatch cycle count = 31513 (31.513 ms)
+
+
 
 
 --------------
