@@ -27,7 +27,10 @@ static Timer TimerA;
 static Timer TimerB;
 static Timer TimerC;
 
-#define reset(Timer,x) Timer.timeRemaining = x
+//#define reset(Timer,x) Timer.timeRemaining = x * 38
+#define TWO_SECONDS 76
+#define THREE_SECONDS 114
+#define FIVE_SECONDS 190
 // **** Declare function prototypes ****
 
 int main(void)
@@ -50,23 +53,34 @@ int main(void)
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-    printf("Welcome to CRUZID's lab4 part1 (timers).  Compiled on %s %s.\n", __TIME__, __DATE__);
-
+    printf("Welcome to CRUZID's lab4 part1 (timers).  Compiled on %s %s.\n", __TIME__, __DATE__); 
+    
+    TimerA.timeRemaining = TWO_SECONDS;
+    TimerB.timeRemaining = THREE_SECONDS;
+    TimerC.timeRemaining = FIVE_SECONDS;
+    LEDS_INIT();
     while (1) {
+        //printf("In Testloop\n"); 
         //poll timer A
             //react to timer A events
             //clear timer A event flag
         if(TimerA.event == TRUE){ 
-            printf("A"); 
             TimerA.event == FALSE;
+            printf("A\n"); 
+            LEDS_SET(0x1);
+            LEDS_SET(0x0);
         }
         if(TimerB.event == TRUE){
-            printf("B");
             TimerB.event == FALSE;
+            printf("B\n");
+            LEDS_SET(0x2);
+            LEDS_SET(0x0);
         }
         if(TimerC.event == TRUE){
-            printf("C");
-            TimerC.event == FALSE;
+            TimerB.event == FALSE;
+            printf("C\n");
+            LEDS_SET(0x4);
+            LEDS_SET(0x0);
         }
 
 
@@ -95,20 +109,20 @@ void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void)
     //if timerA has counted down,
         //generate timerA event
         //reset timerA
-    TimerA.timeRemaining--;
-    TimerB.timeRemaining--;
-    TimerC.timeRemaining--;
-    if(TimerA.timeRemaining ==0){
-        TimerA.event = TRUE;
-        reset(TimerA, 2);
+    TimerA.timeRemaining--;     //update timerA
+    TimerB.timeRemaining--;     //update timerB
+    TimerC.timeRemaining--;     //update timerC
+    if(TimerA.timeRemaining ==0){   //if timerA has counted down,
+        TimerA.event = TRUE;        //generate timerA event
+        TimerA.timeRemaining = TWO_SECONDS;           //reset timerA
     }
-    if(TimerB.timeRemaining ==0){
-        TimerB.event = TRUE;
-        reset(TimerB, 3);
+    if(TimerB.timeRemaining ==0){   //if timerB has counted down,
+        TimerB.event = TRUE;        //generate timerB event
+        TimerB.timeRemaining = THREE_SECONDS;           //reset timerB
     }
-    if(TimerC.timeRemaining ==0){
-        TimerC.event = TRUE;        
-        reset(TimerC, 5);
+    if(TimerC.timeRemaining ==0){   //if timerC has counted down,
+        TimerC.event = TRUE;        //generate timerC event
+        TimerC.timeRemaining = FIVE_SECONDS;          //reset timerC
 
     }
     
