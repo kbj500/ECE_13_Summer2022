@@ -55,32 +55,28 @@ int main(void)
      **************************************************************************************************/
     printf("Welcome to CRUZID's lab4 part1 (timers).  Compiled on %s %s.\n", __TIME__, __DATE__); 
     
-    TimerA.timeRemaining = TWO_SECONDS;
+    TimerA.timeRemaining = TWO_SECONDS;     //initialize starting times
     TimerB.timeRemaining = THREE_SECONDS;
-    TimerC.timeRemaining = FIVE_SECONDS;
-    LEDS_INIT();
+    TimerC.timeRemaining = FIVE_SECONDS; 
+    LEDS_INIT(); // initialize board
     while (1) {
-        //printf("In Testloop\n"); 
         //poll timer A
             //react to timer A events
             //clear timer A event flag
         if(TimerA.event == TRUE){ 
             TimerA.event == FALSE;
             printf("A\n"); 
-            LEDS_SET(0x1);
-            LEDS_SET(0x0);
+            LEDS_SET(LEDS_GET()^0x1);
         }
         if(TimerB.event == TRUE){
             TimerB.event == FALSE;
             printf("B\n");
-            LEDS_SET(0x2);
-            LEDS_SET(0x0);
+            LEDS_SET(LEDS_GET()^0x2);
         }
         if(TimerC.event == TRUE){
             TimerB.event == FALSE;
             printf("C\n");
-            LEDS_SET(0x4);
-            LEDS_SET(0x0);
+            LEDS_SET(LEDS_GET()^0x4);
         }
 
 

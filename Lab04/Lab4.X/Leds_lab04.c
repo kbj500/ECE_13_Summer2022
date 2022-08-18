@@ -1,4 +1,5 @@
 
+#include <stdio.h>
 #include "Leds_Lab04.h"
 //CMPE13 Support Library
 #include "BOARD.h"
@@ -9,12 +10,13 @@
  *
  * 
  */
-/*
+/* MINI TEST HARNESS
 int main(void){
     
     LEDS_INIT();
     while(1){
-    LEDS_SET(0xFF);
+    /*LEDS_SET(0xFF);
+    
     LEDS_SET(0x00);
   
     LEDS_SET(0x40);
@@ -23,7 +25,8 @@ int main(void){
     
     LEDS_SET(0x10);
    
-    LEDS_SET(0x8);
+    LEDS_SET(0x80);
+    printf("LED:%d\n",LEDS_GET());
     
     LEDS_SET(0x4);
    
@@ -56,8 +59,8 @@ int main(void){
  * After calling LEDS_INIT(), the other functions in this file can be used to manipulate the LED bar.
  */
 void LEDS_INIT(void){
-    TRISE = 0x0; // 0000 0000
-    LATE = 0x0; // 0000 0000
+    TRISE = 0x00; // 0000 0000
+    LATE = 0x00; // 0000 0000
     
 }
 
@@ -73,8 +76,11 @@ void LEDS_INIT(void){
  * LEDS_SET should not change any LED pins to inputs.
  */
 void LEDS_SET(char newPattern){
-    
-    LATE = newPattern;
+    printf("LED_SET\n");
+    printf("char:%d\n",newPattern);
+    unsigned char n = newPattern;
+    LATE = n;
+     printf("LATE:%d\n",LATE);
 }
 
 
@@ -88,5 +94,6 @@ void LEDS_SET(char newPattern){
  * LEDS_GET() should not change the state of the LEDS, or any SFRs.
  */
 char LEDS_GET(void){
-    return LATE; 
+    unsigned char c = LATE;
+    return c;
 }

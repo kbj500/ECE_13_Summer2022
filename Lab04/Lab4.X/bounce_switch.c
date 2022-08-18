@@ -13,14 +13,21 @@
 #include <xc.h>
 #include <sys/attribs.h>
 
-// **** Declare any datatypes here ****
+// User libraries
+#include "Leds_Lab04.h"
 
+// **** Declare any datatypes here ****
+typedef struct Timer {
+    uint8_t event;
+    int16_t timeRemaining;
+}Timer;	
 
 // **** Define global, module-level, or external variables here ****
-												 
-
+static Timer TimerS;
+static int state;
+#define LEFT 1
+#define RIGHT 0
 // **** Declare function prototypes ****
-
 
 int main(void)
 {
@@ -42,12 +49,42 @@ int main(void)
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-    printf("Welcome to CRUZID's lab4 part2 (bounce_switch).  Compiled on %s %s.\n",__TIME__,__DATE__);
-
-							 
-	while(1){
-        //poll timer events and react if any occur
-    }			
+    LEDS_INIT(); // initialize board
+    LEDS_SET(0x1); //set initial LED
+    TimerS.timeRemaining = 76;
+    printf("0x80:%d\n", 0x80);
+    printf("LED START:%d\n",LEDS_GET());
+    //LEDS_SET(LEDS_GET()<<1);
+    //printf("LED START SHIFT LEFT:%d\n",LEDS_GET());
+    int counter = 0;
+    printf("Welcome to CRUZID's lab4 part2 (bounce_switch).  Compiled on %s %s.\n",__TIME__,__DATE__);				 
+	while(counter < 16){
+        //poll timer events and react if any occur 
+        if(LEDS_GET() == 0x1){
+            state = LEFT;// Reverse direction
+            printf("State set Left");
+        }
+        else if(LEDS_GET() == 0x80){
+            state = RIGHT;// Reverse direction
+            printf("State set Right");
+        }
+        if(state == LEFT){
+            printf("LED:%d\n",LEDS_GET());            
+            LEDS_SET(LEDS_GET()<<1);
+            
+             printf("LED SHIFTED LEFT:%d\n",LEDS_GET());
+        }
+        else{
+            printf("LED:%d\n",LEDS_GET());            
+            printf("LED SHIFTED RIGHT:%d\n",LEDS_GET()>>1);
+            LEDS_SET(LEDS_GET()>>1);
+        }
+        counter++;
+        //TimerS.event = FALSE;//clear timer event flag
+        
+    }
+        
+    			
 
 
     /***************************************************************************************************
@@ -71,7 +108,15 @@ void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void)
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-
+    
+    if(SWITCH_STATES() &  SWITCH_STATE_SW1 || SWITCH_STATES() &  SWITCH_STATE_SW2 || SWITCH_STATES() &  SWITCH_STATE_SW3 || SWITCH_STATES() &  SWITCH_STATE_SW4){   //any switches up
+        TimerS.event = TRUE; 
+        TimerS.timeRemaining +=  8;   //decrement slower        
+    }
+    else{
+        TimerS.event = TRUE;
+        TimerS.timeRemaining -=  8; //decrement fast
+    }
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
      **************************************************************************************************/									

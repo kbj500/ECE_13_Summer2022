@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/BOARD.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_timers.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Leds_lab04.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_switch.c
+SOURCEFILES_QUOTED_IF_SPACED=/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/BOARD.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Leds_lab04.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_switch.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1739681191/BOARD.o ${OBJECTDIR}/_ext/1739681191/bounce_timers.o ${OBJECTDIR}/_ext/1739681191/Leds_lab04.o ${OBJECTDIR}/_ext/1739681191/bounce_switch.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1739681191/BOARD.o.d ${OBJECTDIR}/_ext/1739681191/bounce_timers.o.d ${OBJECTDIR}/_ext/1739681191/Leds_lab04.o.d ${OBJECTDIR}/_ext/1739681191/bounce_switch.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1739681191/BOARD.o ${OBJECTDIR}/_ext/1739681191/Leds_lab04.o ${OBJECTDIR}/_ext/1739681191/bounce_switch.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1739681191/BOARD.o.d ${OBJECTDIR}/_ext/1739681191/Leds_lab04.o.d ${OBJECTDIR}/_ext/1739681191/bounce_switch.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/1739681191/BOARD.o ${OBJECTDIR}/_ext/1739681191/bounce_timers.o ${OBJECTDIR}/_ext/1739681191/Leds_lab04.o ${OBJECTDIR}/_ext/1739681191/bounce_switch.o
+OBJECTFILES=${OBJECTDIR}/_ext/1739681191/BOARD.o ${OBJECTDIR}/_ext/1739681191/Leds_lab04.o ${OBJECTDIR}/_ext/1739681191/bounce_switch.o
 
 # Source Files
-SOURCEFILES=/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/BOARD.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_timers.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Leds_lab04.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_switch.c
+SOURCEFILES=/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/BOARD.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Leds_lab04.c /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_switch.c
 
 
 
@@ -113,12 +113,6 @@ ${OBJECTDIR}/_ext/1739681191/BOARD.o: /Users/bijayakhadka/Documents/ECE_13/bkhad
 	@${RM} ${OBJECTDIR}/_ext/1739681191/BOARD.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/_ext/1739681191/BOARD.o.d" -o ${OBJECTDIR}/_ext/1739681191/BOARD.o /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/_ext/1739681191/bounce_timers.o: /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_timers.c  .generated_files/flags/default/2bd6d85435ad7942dcb2a91a77bdea3b58535a7b .generated_files/flags/default/b049a9946035c0d6f8c1361b9c30a33141c1b72d
-	@${MKDIR} "${OBJECTDIR}/_ext/1739681191" 
-	@${RM} ${OBJECTDIR}/_ext/1739681191/bounce_timers.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1739681191/bounce_timers.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/_ext/1739681191/bounce_timers.o.d" -o ${OBJECTDIR}/_ext/1739681191/bounce_timers.o /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_timers.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
 ${OBJECTDIR}/_ext/1739681191/Leds_lab04.o: /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Leds_lab04.c  .generated_files/flags/default/66ea2d131139fc49185111826a4de355b8d59e6e .generated_files/flags/default/b049a9946035c0d6f8c1361b9c30a33141c1b72d
 	@${MKDIR} "${OBJECTDIR}/_ext/1739681191" 
 	@${RM} ${OBJECTDIR}/_ext/1739681191/Leds_lab04.o.d 
@@ -137,12 +131,6 @@ ${OBJECTDIR}/_ext/1739681191/BOARD.o: /Users/bijayakhadka/Documents/ECE_13/bkhad
 	@${RM} ${OBJECTDIR}/_ext/1739681191/BOARD.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1739681191/BOARD.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/_ext/1739681191/BOARD.o.d" -o ${OBJECTDIR}/_ext/1739681191/BOARD.o /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/BOARD.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/_ext/1739681191/bounce_timers.o: /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_timers.c  .generated_files/flags/default/bf218c9365c0231bdc312bdfa25846b64685467c .generated_files/flags/default/b049a9946035c0d6f8c1361b9c30a33141c1b72d
-	@${MKDIR} "${OBJECTDIR}/_ext/1739681191" 
-	@${RM} ${OBJECTDIR}/_ext/1739681191/bounce_timers.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1739681191/bounce_timers.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/_ext/1739681191/bounce_timers.o.d" -o ${OBJECTDIR}/_ext/1739681191/bounce_timers.o /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_timers.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 ${OBJECTDIR}/_ext/1739681191/Leds_lab04.o: /Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Leds_lab04.c  .generated_files/flags/default/f4fc19222aa7cac4a0cbed8e07473f83c4ed200d .generated_files/flags/default/b049a9946035c0d6f8c1361b9c30a33141c1b72d
 	@${MKDIR} "${OBJECTDIR}/_ext/1739681191" 
