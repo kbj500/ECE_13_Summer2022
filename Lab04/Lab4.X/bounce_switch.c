@@ -27,6 +27,17 @@ static Timer TimerS;
 static int state;
 #define LEFT 1
 #define RIGHT 0
+
+#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
+#define BYTE_TO_BINARY(byte)  \
+  (byte & 0x80 ? '1' : '0'), \
+  (byte & 0x40 ? '1' : '0'), \
+  (byte & 0x20 ? '1' : '0'), \
+  (byte & 0x10 ? '1' : '0'), \
+  (byte & 0x08 ? '1' : '0'), \
+  (byte & 0x04 ? '1' : '0'), \
+  (byte & 0x02 ? '1' : '0'), \
+  (byte & 0x01 ? '1' : '0') 
 // **** Declare function prototypes ****
 
 int main(void)
@@ -49,38 +60,45 @@ int main(void)
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
+    
     LEDS_INIT(); // initialize board
-    LEDS_SET(0x1); //set initial LED
-    TimerS.timeRemaining = 76;
-    printf("0x80:%d\n", 0x80);
+    //TimerS.timeRemaining = 1+ SWITCH_STATES();
+    
     printf("LED START:%d\n",LEDS_GET());
-    //LEDS_SET(LEDS_GET()<<1);
-    //printf("LED START SHIFT LEFT:%d\n",LEDS_GET());
-    int counter = 0;
+    int l = 1; //set initial LED
+    TimerS.timeRemaining = SWITCH_STATES()+1;
     printf("Welcome to CRUZID's lab4 part2 (bounce_switch).  Compiled on %s %s.\n",__TIME__,__DATE__);				 
-	while(counter < 16){
-        //poll timer events and react if any occur 
-        if(LEDS_GET() == 0x1){
+	while(1){
+        if(TimerS.event == TRUE)
+        {//poll timer events and react if any occur 
+        if(l == 0x01){
             state = LEFT;// Reverse direction
-            printf("State set Left");
+            printf("State set Left\n");
         }
-        else if(LEDS_GET() == 0x80){
+        else if(l == 0x80){
             state = RIGHT;// Reverse direction
-            printf("State set Right");
+            printf("State set Right\n");
         }
         if(state == LEFT){
-            printf("LED:%d\n",LEDS_GET());            
-            LEDS_SET(LEDS_GET()<<1);
+            printf("\nLED:%d\n",LEDS_GET()); 
+            printf("Binary:\n"BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(LEDS_GET()));
+            l <<= 1;
+            LEDS_SET(l);
+            printf("\nLED SHIFTED LEFT:%d\n",LEDS_GET());
             
-             printf("LED SHIFTED LEFT:%d\n",LEDS_GET());
+             printf("LED SHIFTED LEFT FINAL:%d\n",LEDS_GET());
         }
         else{
-            printf("LED:%d\n",LEDS_GET());            
-            printf("LED SHIFTED RIGHT:%d\n",LEDS_GET()>>1);
-            LEDS_SET(LEDS_GET()>>1);
+            printf("\nLED:%d\n",LEDS_GET()); 
+            printf("Binary:\n"BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(LEDS_GET()));
+            l >>= 1;
+            LEDS_SET(l);
+            printf("LED SHIFTED RIGHT:%d\n",LEDS_GET());
         }
-        counter++;
-        //TimerS.event = FALSE;//clear timer event flag
+        TimerS.event = FALSE; //clear timer event flag
+        //TimerS.timeRemaining = 2+ SWITCH_STATES(); //reset timer
+        }
+        
         
     }
         
@@ -109,14 +127,20 @@ void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void)
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
     
+    TimerS.timeRemaining--;     //update timerS
+    if(TimerS.timeRemaining ==0){   //if timerS has counted down,
+        TimerS.event = TRUE;        //generate timerSevent
+        TimerS.timeRemaining = SWITCH_STATES();           //reset timerS
     if(SWITCH_STATES() &  SWITCH_STATE_SW1 || SWITCH_STATES() &  SWITCH_STATE_SW2 || SWITCH_STATES() &  SWITCH_STATE_SW3 || SWITCH_STATES() &  SWITCH_STATE_SW4){   //any switches up
         TimerS.event = TRUE; 
-        TimerS.timeRemaining +=  8;   //decrement slower        
+        TimerS.timeRemaining += SWITCH_STATES()+1;   //decrement slower        
     }
     else{
         TimerS.event = TRUE;
-        TimerS.timeRemaining -=  8; //decrement fast
+        TimerS.timeRemaining -= SWITCH_STATES()-1; //decrement fast
     }
+    }
+    
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
      **************************************************************************************************/									

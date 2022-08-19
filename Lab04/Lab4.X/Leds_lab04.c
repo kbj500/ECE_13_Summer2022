@@ -76,10 +76,8 @@ void LEDS_INIT(void){
  * LEDS_SET should not change any LED pins to inputs.
  */
 void LEDS_SET(char newPattern){
-    printf("LED_SET\n");
-    printf("char:%d\n",newPattern);
-    unsigned char n = newPattern;
-    LATE = n;
+    
+    LATE = newPattern;
      printf("LATE:%d\n",LATE);
 }
 
@@ -94,6 +92,5 @@ void LEDS_SET(char newPattern){
  * LEDS_GET() should not change the state of the LEDS, or any SFRs.
  */
 char LEDS_GET(void){
-    unsigned char c = LATE;
-    return c;
+    return LATE;
 }
