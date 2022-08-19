@@ -78,7 +78,7 @@ void LEDS_INIT(void){
 void LEDS_SET(char newPattern){
     
     LATE = newPattern;
-     printf("LATE:%d\n",LATE);
+     //printf("LATE:%d\n",LATE);
 }
 
 

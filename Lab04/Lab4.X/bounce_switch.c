@@ -96,7 +96,7 @@ int main(void)
             printf("LED SHIFTED RIGHT:%d\n",LEDS_GET());
         }
         TimerS.event = FALSE; //clear timer event flag
-        //TimerS.timeRemaining = 2+ SWITCH_STATES(); //reset timer
+        
         }
         
         

@@ -28,6 +28,17 @@ static Timer TimerB;
 static Timer TimerC;
 
 //#define reset(Timer,x) Timer.timeRemaining = x * 38
+#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
+#define BYTE_TO_BINARY(byte)  \
+  (byte & 0x80 ? '1' : '0'), \
+  (byte & 0x40 ? '1' : '0'), \
+  (byte & 0x20 ? '1' : '0'), \
+  (byte & 0x10 ? '1' : '0'), \
+  (byte & 0x08 ? '1' : '0'), \
+  (byte & 0x04 ? '1' : '0'), \
+  (byte & 0x02 ? '1' : '0'), \
+  (byte & 0x01 ? '1' : '0') 
+
 #define TWO_SECONDS 76
 #define THREE_SECONDS 114
 #define FIVE_SECONDS 190
@@ -59,25 +70,34 @@ int main(void)
     TimerB.timeRemaining = THREE_SECONDS;
     TimerC.timeRemaining = FIVE_SECONDS; 
     LEDS_INIT(); // initialize board
-    while (1) {
+    int counter = 0;
+    while (counter < 10000000) {
         //poll timer A
             //react to timer A events
             //clear timer A event flag
         if(TimerA.event == TRUE){ 
-            TimerA.event == FALSE;
+            TimerA.event = FALSE;
             printf("A\n"); 
-            LEDS_SET(LEDS_GET()^0x1);
+            //printf("LED BEFORE A XOR:%d\n",LEDS_GET());
+            LEDS_SET(LEDS_GET()^0x01);
+           // printf("LED AFTER A XOR:%d\n",LEDS_GET());
+            
         }
         if(TimerB.event == TRUE){
-            TimerB.event == FALSE;
+            TimerB.event = FALSE;
             printf("B\n");
-            LEDS_SET(LEDS_GET()^0x2);
+            //printf("LED BEFORE B XOR:%d\n",LEDS_GET());
+            LEDS_SET(LEDS_GET()^0x02);
+            //printf("LED AFTER B XOR:%d\n",LEDS_GET());
         }
         if(TimerC.event == TRUE){
-            TimerB.event == FALSE;
+            TimerC.event = FALSE;
             printf("C\n");
-            LEDS_SET(LEDS_GET()^0x4);
+            //printf("LED BEFORE C XOR:%d\n",LEDS_GET());
+            LEDS_SET(LEDS_GET()^0x04);
+            //printf("LED AFTER C XOR:%d\n",LEDS_GET());
         }
+        counter++;
 
 
     /***************************************************************************************************

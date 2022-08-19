@@ -4,12 +4,12 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Leds_Lab04.h</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Ascii.h</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/BOARD.h</itemPath>
+      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Buttons.h</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Oled.h</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/OledDriver.h</itemPath>
-      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Buttons.h</itemPath>
-      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Leds_Lab04.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -18,16 +18,16 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/BOARD.c</itemPath>
-      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_adc_template.c</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_buttons_template.c</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_ec_template.c</itemPath>
-      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Oled.c</itemPath>
-      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/OledDriver.c</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_timers.c</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Leds_lab04.c</itemPath>
-      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Buttons.c</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_switch.c</itemPath>
+      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_adc.c</itemPath>
+      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Ascii.c</itemPath>
+      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/BOARD.c</itemPath>
+      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Oled.c</itemPath>
+      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/OledDriver.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -78,31 +78,15 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Buttons.c"
-            ex="true"
-            overriding="false">
-      </item>
-      <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Buttons.h"
-            ex="true"
-            overriding="false">
-      </item>
-      <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Oled.c"
-            ex="true"
-            overriding="false">
-      </item>
-      <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/OledDriver.c"
-            ex="true"
-            overriding="false">
-      </item>
-      <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_adc_template.c"
-            ex="true"
-            overriding="false">
-      </item>
       <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_buttons_template.c"
             ex="true"
             overriding="false">
       </item>
       <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_ec_template.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_switch.c"
             ex="true"
             overriding="false">
       </item>
