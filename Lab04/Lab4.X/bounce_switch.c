@@ -63,37 +63,31 @@ int main(void)
     
     LEDS_INIT(); // initialize board
     
+    int l = 1;                                  //set initial LED
+    TimerS.timeRemaining = SWITCH_STATES()+1;   //set initial time
     
-    //printf("LED START:%d\n",LEDS_GET());
-    int l = 1; //set initial LED
-    TimerS.timeRemaining = SWITCH_STATES()+1;
     printf("Welcome to bkhadka's lab4 part2 (bounce_switch).  Compiled on %s %s.\n",__TIME__,__DATE__);				 
 	while(1){
         if(TimerS.event == TRUE)
-        {//poll timer events and react if any occur 
-        if(l == 0x01){
-            state = LEFT;// Reverse direction
-            //printf("State set Left\n");
-        }
-        else if(l == 0x80){
-            state = RIGHT;// Reverse direction
-           // printf("State set Right\n");
-        }
-        if(state == LEFT){
-            //printf("\nLED:%d\n",LEDS_GET()); 
-            //printf("Binary:\n"BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(LEDS_GET()));
-            l <<= 1;
-            LEDS_SET(l);
-            //printf("\nLED SHIFTED LEFT:%d\n",LEDS_GET());
+        {                               //poll timer events and react if any occur 
             
-             //printf("LED SHIFTED LEFT FINAL:%d\n",LEDS_GET());
+        if(l == 0x01){                  // check if LEDS at end
+            state = LEFT;               // Reverse direction
         }
-        else{
-            //printf("\nLED:%d\n",LEDS_GET()); 
-            //printf("Binary:\n"BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(LEDS_GET()));
-            l >>= 1;
-            LEDS_SET(l);
-            //printf("LED SHIFTED RIGHT:%d\n",LEDS_GET());
+        else if(l == 0x80){              // check if LEDS at end
+            state = RIGHT;               // Reverse direction
+        }
+        if(state == LEFT){              //check Left state
+            
+            l <<= 1;                    //left state -> shift bitwise left 
+            
+            LEDS_SET(l);                //set LED
+        }
+        else{                           //else Right state
+            
+            l >>= 1;                    //right state -> shift bitwise right
+            
+            LEDS_SET(l);                //set LED
         }
         TimerS.event = FALSE; //clear timer event flag
         
@@ -132,11 +126,11 @@ void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void)
         TimerS.event = TRUE;        //generate timerSevent
         TimerS.timeRemaining = SWITCH_STATES();           //reset timerS
     if(SWITCH_STATES() &  SWITCH_STATE_SW1 || SWITCH_STATES() &  SWITCH_STATE_SW2 || SWITCH_STATES() &  SWITCH_STATE_SW3 || SWITCH_STATES() &  SWITCH_STATE_SW4){   //any switches up
-        TimerS.event = TRUE; 
+        TimerS.event = TRUE; //generate timerSevent
         TimerS.timeRemaining += SWITCH_STATES()+1;   //decrement slower        
     }
     else{
-        TimerS.event = TRUE;
+        TimerS.event = TRUE; //generate timerSevent
         TimerS.timeRemaining -= SWITCH_STATES()-1; //decrement fast
     }
     }

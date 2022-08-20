@@ -15,16 +15,17 @@
 #include "Oled.h"
 
 // **** Set macros and preprocessor directives ****
-#define WINDOW_SIZE 5 
+#define WINDOW_SIZE 5   //macro for window size
+
 // **** Declare any datatypes here ****
 typedef struct AdcResult{
     uint8_t event;
     int16_t voltage;
-}AdcResult;
+}AdcResult;                 //struct for seeing voltage
 
 // **** Define global, module-level, or external variables here ****
 static AdcResult AR;
-static int prev = 0;
+static int prev = 0;        // previous voltage value
 // **** Declare function prototypes ****
 
 int main(void)
@@ -60,18 +61,18 @@ int main(void)
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-    OledInit();
-    int raw = 0;
-    float percent = 0;
-    char r[3];
-    char p[2];
+    OledInit(); //initialize board
+    int raw = 0; // raw voltage value
+    float percent = 0; // percent of total voltage
+    char r[3]; //char to hold raw value for print
+    char p[2]; // char to hold percent value for print
   printf("Welcome to bkhadka's lab4 part3 (bounce_adc).  Compiled on %s %s.\n",__TIME__,__DATE__);
 
   while(1){
       if(AR.event ==TRUE){
           OledDrawString("Potentiometer Value"); //heading
           
-          raw = (ADC1BUF0+ADC1BUF1+ADC1BUF2+ADC1BUF3+ADC1BUF4+ADC1BUF5+ADC1BUF6+ADC1BUF7) / 8;
+          raw = (ADC1BUF0+ADC1BUF1+ADC1BUF2+ADC1BUF3+ADC1BUF4+ADC1BUF5+ADC1BUF6+ADC1BUF7) / 8; //raw value
           sprintf(r, "%d", raw);        //set raw value to char string
           
           OledDrawChar(16,15,r[0]);     //write out to OLED with each character in raw value
@@ -79,7 +80,7 @@ int main(void)
           OledDrawChar(27,15,r[2]);
           OledDrawChar(32,15,r[3]);
           
-          percent = ((float) raw)/1023 * 100;
+          percent = ((float) raw)/1023 * 100; //percent of raw voltage
           sprintf(p, "%3.0f", percent); //set percent value to char string
           
           OledDrawChar(48,15,p[0]);    // write out to OLED with each character in percentage 
@@ -106,13 +107,13 @@ int main(void)
  */
 void __ISR(_ADC_VECTOR, ipl2auto) AdcHandler(void)
 {
-    // Clear the interrupt flag.
+    
     IFS1bits.AD1IF = 0;
-    int current = (ADC1BUF0+ADC1BUF1+ADC1BUF2+ADC1BUF3+ADC1BUF4+ADC1BUF5+ADC1BUF6+ADC1BUF7) / 8;
-   //read 8 buffered ADC values in ADC1BUF0 and average them
-    if (current-prev > WINDOW_SIZE || current-prev < WINDOW_SIZE ){
-        prev = current;
-        AR.event = TRUE;
+    int current = (ADC1BUF0+ADC1BUF1+ADC1BUF2+ADC1BUF3+ADC1BUF4+ADC1BUF5+ADC1BUF6+ADC1BUF7) / 8; //read 8 buffered ADC values in ADC1BUF0 and average them
+
+    if (current-prev > WINDOW_SIZE || current-prev < WINDOW_SIZE ){ //if window size has been exceeded 
+        prev = current;         // set new previous value
+        AR.event = TRUE;        // event activate
     }
     
     // if ADC reading exits window,generate ADC event and update window center

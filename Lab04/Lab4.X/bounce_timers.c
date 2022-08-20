@@ -23,12 +23,12 @@ typedef struct Timer {
 }Timer;
 
 // **** Define global, module-level, or external variables here ****
-static Timer TimerA;
+static Timer TimerA;        
 static Timer TimerB;
 static Timer TimerC;
 
-//#define reset(Timer,x) Timer.timeRemaining = x * 38
-#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
+
+#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c" //macros prints BINARY 
 #define BYTE_TO_BINARY(byte)  \
   (byte & 0x80 ? '1' : '0'), \
   (byte & 0x40 ? '1' : '0'), \
@@ -39,7 +39,7 @@ static Timer TimerC;
   (byte & 0x02 ? '1' : '0'), \
   (byte & 0x01 ? '1' : '0') 
 
-#define TWO_SECONDS 76
+#define TWO_SECONDS 76      //macros for each second value based on hertz value
 #define THREE_SECONDS 114
 #define FIVE_SECONDS 190
 // **** Declare function prototypes ****
@@ -69,41 +69,34 @@ int main(void)
     TimerA.timeRemaining = TWO_SECONDS;     //initialize starting times
     TimerB.timeRemaining = THREE_SECONDS;
     TimerC.timeRemaining = FIVE_SECONDS; 
+    
     LEDS_INIT(); // initialize board
-    int counter = 0;
-    while (counter < 10000000) {
+    
+    while (1) {
         //poll timer A
             //react to timer A events
             //clear timer A event flag
-        if(TimerA.event == TRUE){ 
-            TimerA.event = FALSE;
+        if(TimerA.event == TRUE){           //poll timer A
+            TimerA.event = FALSE;           //clear timer A event flag
             printf("A\n"); 
-            //printf("LED BEFORE A XOR:%d\n",LEDS_GET());
-            LEDS_SET(LEDS_GET()^0x01);
-           // printf("LED AFTER A XOR:%d\n",LEDS_GET());
+            LEDS_SET(LEDS_GET()^0x01);      //react to timer A events
             
         }
-        if(TimerB.event == TRUE){
-            TimerB.event = FALSE;
+        if(TimerB.event == TRUE){           //poll timer B 
+            TimerB.event = FALSE;           //clear timer B event flag
             printf("B\n");
-            //printf("LED BEFORE B XOR:%d\n",LEDS_GET());
-            LEDS_SET(LEDS_GET()^0x02);
-            //printf("LED AFTER B XOR:%d\n",LEDS_GET());
+            LEDS_SET(LEDS_GET()^0x02);      //react to timer B events
         }
-        if(TimerC.event == TRUE){
-            TimerC.event = FALSE;
+        if(TimerC.event == TRUE){           //poll timer C
+            TimerC.event = FALSE;           //clear timer C event flag
             printf("C\n");
-            //printf("LED BEFORE C XOR:%d\n",LEDS_GET());
-            LEDS_SET(LEDS_GET()^0x04);
-            //printf("LED AFTER C XOR:%d\n",LEDS_GET());
+            LEDS_SET(LEDS_GET()^0x04);      //react to timer C events
         }
-        counter++;
 
-
+    }
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
      **************************************************************************************************/
-    }
        
 }
 
@@ -121,10 +114,7 @@ void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void)
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
     
-    //update timerA
-    //if timerA has counted down,
-        //generate timerA event
-        //reset timerA
+    
     TimerA.timeRemaining--;     //update timerA
     TimerB.timeRemaining--;     //update timerB
     TimerC.timeRemaining--;     //update timerC

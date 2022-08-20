@@ -43,75 +43,60 @@ int main(void)
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
     
-    ButtonsInit();
+    ButtonsInit(); //initialize board
     printf("Welcome to bkhadka's lab4 part4 (ButtonsTest).  Compiled on %s %s.\n", __TIME__, __DATE__);
 
     
     printf("Please press some buttons!\n");
-    while(1){
-        if(ButtonResult != prevButtonResult)
+    while(1){                                   
+        if(ButtonResult != prevButtonResult)        //if Button status has changed
         {
         
-            char b1[6];
+            char b1[6];                             // chars for printing output
             char b2[6];
             char b3[6];
             char b4[6];
-            //printf("%d",ButtonResult);
-        if(ButtonResult & BUTTON_EVENT_1UP){
-            strcpy(b1, "UP");//button one up
-            //printf("\nBUTTON 1 has been pressed %s",b1);
+        if(ButtonResult & BUTTON_EVENT_1UP){        // if button one up event occurred
+            strcpy(b1, "UP"); //button one up
         }
-        else if(ButtonResult & BUTTON_EVENT_1DOWN) {
-            strcpy(b1, "DOWN");//button one down
+        else if(ButtonResult & BUTTON_EVENT_1DOWN) { // if button one down event occurred
+            strcpy(b1, "DOWN"); //button one down
             
-            //printf("\nBUTTON 1 has been pressed %s",b1);
         }
-        else{
-            strcpy(b1, "----");
+        else{                                       //else no event
+            strcpy(b1, "----");                     
         }
-        if(ButtonResult & BUTTON_EVENT_2UP){
+        if(ButtonResult & BUTTON_EVENT_2UP){        // if button two up event occurred
             strcpy(b2, "UP");//button two up
-            
-            //printf("\nBUTTON 2 has been pressed %s",b2);
         }
-        else if(ButtonResult & BUTTON_EVENT_2DOWN) {
+        else if(ButtonResult & BUTTON_EVENT_2DOWN) {  // if button two down event occurred
             strcpy(b2, "DOWN");//button two down
-            
-            //printf("\nBUTTON 2 has been pressed %s",b2);
         }
-            else{
+            else{                                       //else no event
             strcpy(b2, "----");
         }
-        if(ButtonResult & BUTTON_EVENT_3UP){
+        if(ButtonResult & BUTTON_EVENT_3UP){        // if button three up event occurred
             strcpy(b3, "UP");//button three up
-            
-            //printf("\nBUTTON 3 has been pressed %s",b3);
         }
-        else if(ButtonResult & BUTTON_EVENT_3DOWN) {
+        else if(ButtonResult & BUTTON_EVENT_3DOWN) {    // if button three down event occurred
             strcpy(b3, "DOWN");//button three down
-            
-            //printf("\nBUTTON 3 has been pressed %s",b3);
         }
-            else{
+        else{                                   // else no event
             strcpy(b3, "----");
         }
-        if(ButtonResult & BUTTON_EVENT_4UP){
+        if(ButtonResult & BUTTON_EVENT_4UP){        // if button four up event occurred
            strcpy(b4, "UP"); //button four up
-           
-            //printf("\nBUTTON 4 has been pressed %s",b4);
         }
-        else if(ButtonResult & BUTTON_EVENT_4DOWN) {
+        else if(ButtonResult & BUTTON_EVENT_4DOWN) {     // if button four down event occurred
             strcpy(b4, "DOWN");//button four down
-            
-            //printf("\nBUTTON 3 has been pressed %s",b4);
         }
-        else{
+        else{                                   //else no event
             strcpy(b4, "----");
         }
         
-        printf("\nEVENT: 4: %s 3: %s 2: %s 1: %s\n",b4,b3,b2,b1);
-            prevButtonResult = ButtonResult;
-            
+        printf("\nEVENT: 4: %s 3: %s 2: %s 1: %s\n",b4,b3,b2,b1); //output button event result 
+            prevButtonResult = ButtonResult;                        //reset previous button result to current
+                
     
     }
     }
@@ -138,7 +123,7 @@ void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void)
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-    ButtonResult = ButtonsCheckEvents();
+    ButtonResult = ButtonsCheckEvents(); //collect new button activity
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
      **************************************************************************************************/

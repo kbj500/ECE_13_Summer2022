@@ -14,10 +14,10 @@
 #include "BOARD.h"
 #include "Buttons.h"
 
-static int lastState = 0x00;
-static uint8_t lastButtonState = 0x00;
-static int debounce = BUTTONS_DEBOUNCE_PERIOD;
-static int currentState = 0x00;
+static int lastState = 0x00; //preserve last state of BUTTON_STATES())
+static uint8_t lastButtonState = 0x00; //preserve last button state of 8 bit ButtonFlag
+static int debounce = BUTTONS_DEBOUNCE_PERIOD; //debounce time limit
+static int currentState = 0x00; //preserve current state
 /**
  * This function initializes the proper pins such that the buttons 1-4 may be used by modifying
  * the necessary bits in TRISD/TRISF. Only the bits necessary to enable the 1-4 buttons are
@@ -52,75 +52,75 @@ void ButtonsInit(void){
  */
 uint8_t ButtonsCheckEvents(void){
     
-    uint8_t buttonState = 0x00;
+    uint8_t buttonState = 0x00; //variable to hold button state that will be compiled
     if(debounce > 0)
     {
-        debounce--;
-        return lastButtonState;
+        debounce--; //decrement debounce
+        return lastButtonState; //return last button state
     }
     else{
-        currentState = BUTTON_STATES();
-        debounce = BUTTONS_DEBOUNCE_PERIOD;
+        currentState = BUTTON_STATES(); //get current state
+        debounce = BUTTONS_DEBOUNCE_PERIOD; // reset debounce
             
-            if((currentState & BUTTON_STATE_1) ^ (lastState & BUTTON_STATE_1)){ //button 1 has changed it's state
-                if(currentState & BUTTON_STATE_1){
-                  buttonState |= BUTTON_EVENT_1DOWN;
+            if((currentState & BUTTON_STATE_1) ^ (lastState & BUTTON_STATE_1)){ // if button 1 has changed it's state
+                if(currentState & BUTTON_STATE_1){ // if button is pressed currently 
+                  buttonState |= BUTTON_EVENT_1DOWN; //add button event down
                 }
-                else if(lastState & BUTTON_STATE_1){
-                    buttonState |= BUTTON_EVENT_1UP;
+                else if(lastState & BUTTON_STATE_1){ // if button was pressed previously 
+                    buttonState |= BUTTON_EVENT_1UP; //add button event up
                 }
             }
             else {
-                if (currentState & BUTTON_STATE_1){
-                    buttonState |= BUTTON_EVENT_1DOWN;
+                if (currentState & BUTTON_STATE_1){  // if button 1 has not changed it's state in being pressed
+                    buttonState |= BUTTON_EVENT_1DOWN; //add button event down
                 }
                 
             }
         
         
         if((currentState & BUTTON_STATE_2) ^ (lastState & BUTTON_STATE_2)){ //button 2 has changed it's state
-                if(currentState & BUTTON_STATE_2){
-                  buttonState |= BUTTON_EVENT_2DOWN;
+                if(currentState & BUTTON_STATE_2){ // if button is pressed currently 
+                  buttonState |= BUTTON_EVENT_2DOWN; //add button event down
                 }
-                else if(lastState & BUTTON_STATE_2){
-                    buttonState |= BUTTON_EVENT_2UP;
+                else if(lastState & BUTTON_STATE_2){ // if button was pressed previously
+                    buttonState |= BUTTON_EVENT_2UP; //add button event up
                 }
             }
             else {
-                if (currentState & BUTTON_STATE_2){
-                    buttonState |= BUTTON_EVENT_2DOWN;
+                if (currentState & BUTTON_STATE_2){ // if button 1 has not changed it's state in being pressed
+                    buttonState |= BUTTON_EVENT_2DOWN; //add button event down
                 }
                 
             }
         
         
         if((currentState & BUTTON_STATE_3) ^ (lastState & BUTTON_STATE_3)){ //button 3 has changed it's state
-                if(currentState & BUTTON_STATE_3){
-                  buttonState |= BUTTON_EVENT_3DOWN;
+                if(currentState & BUTTON_STATE_3){ // if button is pressed currently
+                  buttonState |= BUTTON_EVENT_3DOWN; //add button event down
                 }
-                else if(lastState & BUTTON_STATE_3){
-                    buttonState |= BUTTON_EVENT_3UP;
+                else if(lastState & BUTTON_STATE_3){ // if button was pressed previously
+                    buttonState |= BUTTON_EVENT_3UP; //add button event up
                 }
             }
             else {
-                if (currentState & BUTTON_STATE_3){
-                    buttonState |= BUTTON_EVENT_3DOWN;
+                if (currentState & BUTTON_STATE_3){ // if button 1 has not changed it's state in being pressed
+                    buttonState |= BUTTON_EVENT_3DOWN; //add button event down
                 }
                 
             }
         
         
         if((currentState & BUTTON_STATE_4) ^ (lastState & BUTTON_STATE_4)){ //button 4 has changed it's state
-                if(currentState & BUTTON_STATE_4){
-                  buttonState |= BUTTON_EVENT_4DOWN;
+                if(currentState & BUTTON_STATE_4){ // if button is pressed currently
+                  buttonState |= BUTTON_EVENT_4DOWN; //add button event down
                 }
-                else if(lastState & BUTTON_STATE_4){
-                   buttonState |= BUTTON_EVENT_4UP;
+                else if(lastState & BUTTON_STATE_4){ // if button was pressed previously
+                   buttonState |= BUTTON_EVENT_4UP; //add button event up
                 }
             }
             else {
-                if (currentState & BUTTON_STATE_4){
-                    buttonState |= BUTTON_EVENT_4DOWN;
+                if (currentState & BUTTON_STATE_4){ // if button 1 has not changed it's state in being pressed
+                    buttonState |= BUTTON_EVENT_4DOWN; //add button event down
                 }
                 
             }
@@ -134,7 +134,7 @@ uint8_t ButtonsCheckEvents(void){
         lastState = currentState; //update last state for next time 
         lastButtonState = buttonState;  //update last button state
         
-        return buttonState;
+        return buttonState; //return final Button event Flag
         }
     }
     

@@ -18,8 +18,8 @@
 // **** Declare any datatypes here ****
 
 // **** Define global, module-level, or external variables here ****
-static uint8_t ButtonResult;
-static uint8_t prevButtonResult;
+static uint8_t ButtonResult; //get Button Event Flag activity
+static uint8_t prevButtonResult; //preserve previous Button activity
 // **** Declare function prototypes ****
 
 int main(void)
@@ -44,36 +44,36 @@ int main(void)
      **************************************************************************************************/
     printf("Welcome to bkhadka's lab4 part5 (bounce_buttons).  Compiled on %s %s.\n", __TIME__, __DATE__);
     LEDS_INIT(); // initialize board
-    int b1counter;
+    int b1counter; //initialize counters to record if button pressed twice to turn off and on
     int b2counter;
     int b3counter;
     int b4counter;
     while(1){
-        if(ButtonResult != prevButtonResult)
+        if(ButtonResult != prevButtonResult) //if Button status has changed
         {
-        if(SWITCH_STATES() &  SWITCH_STATE_SW1 || SWITCH_STATES() &  SWITCH_STATE_SW2 || SWITCH_STATES() &  SWITCH_STATE_SW3 || SWITCH_STATES() &  SWITCH_STATE_SW4){ //switch 1 is 
-           if(ButtonResult & BUTTON_EVENT_1UP) {
-                if(b1counter % 2 == 0){
-                    LEDS_SET(LEDS_GET()^0x3);
+        if(SWITCH_STATES() &  SWITCH_STATE_SW1 || SWITCH_STATES() &  SWITCH_STATE_SW2 || SWITCH_STATES() &  SWITCH_STATE_SW3 || SWITCH_STATES() &  SWITCH_STATE_SW4){ //any switch is on 
+           if(ButtonResult & BUTTON_EVENT_1UP) { // if button up event occurred
+                if(b1counter % 2 == 0){         // if button has already been pressed 
+                    LEDS_SET(LEDS_GET()^0x3); //clear button
                 }
-                else{
+                else{                           //if button has not already been pressed 
 
-                LEDS_SET(LEDS_GET()|0x3);
+                LEDS_SET(LEDS_GET()|0x3);    //activate button
                 }
-                b1counter++;
+                b1counter++;                //increment counter for tracking button pressing
             }
-            if(ButtonResult & BUTTON_EVENT_2UP) {
+            if(ButtonResult & BUTTON_EVENT_2UP) { // if button up event occurred
 
-                if(b2counter % 2 == 0){
-                    LEDS_SET(LEDS_GET()^0xC);
+                if(b2counter % 2 == 0){             // if button has already been pressed 
+                    LEDS_SET(LEDS_GET()^0xC);   //clear button
                 }
 
-                else{
-                LEDS_SET(LEDS_GET()|0xC);
+                else{                       //if button has not already been pressed 
+                LEDS_SET(LEDS_GET()|0xC);   //activate button
                 }
-                b2counter++;
+                b2counter++;                //increment counter for tracking button pressing
             }
-            if(ButtonResult & BUTTON_EVENT_3UP) {
+            if(ButtonResult & BUTTON_EVENT_3UP) { //same as above if statement
                 if(b3counter % 2 == 0){
                     LEDS_SET(LEDS_GET()^0x30);
                 }
@@ -82,7 +82,7 @@ int main(void)
                 }
                 b3counter++;
             }
-            if(ButtonResult & BUTTON_EVENT_4UP) {
+            if(ButtonResult & BUTTON_EVENT_4UP) { //same as above if statement
                 if(b4counter % 2 == 0){
                     LEDS_SET(LEDS_GET()^0xC0);
                 }
@@ -93,18 +93,18 @@ int main(void)
             } 
            
         } 
-        else{
-            if(ButtonResult & BUTTON_EVENT_1DOWN) {
-                if(b1counter % 2 == 0){
-                    LEDS_SET(LEDS_GET()^0x3);
+        else{                                       //if no switch is on
+            if(ButtonResult & BUTTON_EVENT_1DOWN) {     // if button down event occurred
+                if(b1counter % 2 == 0){                  // if button has already been pressed 
+                    LEDS_SET(LEDS_GET()^0x3);           //clear button
                 }
-                else{
+                else{                               //if button has not already been pressed
 
-                LEDS_SET(LEDS_GET()|0x3);
+                LEDS_SET(LEDS_GET()|0x3);           //activate button
                 }
-                b1counter++;
+                b1counter++;                        //increment counter for tracking button pressing
             }
-            if(ButtonResult & BUTTON_EVENT_2DOWN) {
+            if(ButtonResult & BUTTON_EVENT_2DOWN) { //same as above if statement
 
                 if(b2counter % 2 == 0){
                     LEDS_SET(LEDS_GET()^0xC);
@@ -115,7 +115,7 @@ int main(void)
                 }
                 b2counter++;
             }
-            if(ButtonResult & BUTTON_EVENT_3DOWN) {
+            if(ButtonResult & BUTTON_EVENT_3DOWN) { //same as above if statement
                 if(b3counter % 2 == 0){
                     LEDS_SET(LEDS_GET()^0x30);
                 }
@@ -124,7 +124,7 @@ int main(void)
                 }
                 b3counter++;
             }
-            if(ButtonResult & BUTTON_EVENT_4DOWN) {
+            if(ButtonResult & BUTTON_EVENT_4DOWN) { //same as above if statement
                 if(b4counter % 2 == 0){
                     LEDS_SET(LEDS_GET()^0xC0);
                 }
@@ -137,7 +137,7 @@ int main(void)
         
             
         }
-        prevButtonResult = ButtonResult;
+        prevButtonResult = ButtonResult; //update previousButton result
     }
     }
     
@@ -163,7 +163,7 @@ void __ISR(_TIMER_1_VECTOR, ipl4auto) Timer1Handler(void)
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-    ButtonResult = ButtonsCheckEvents();
+    ButtonResult = ButtonsCheckEvents(); //collect new button activity
 
     /***************************************************************************************************
      * Your code goes in between this comment and the preceding one with asterisks
