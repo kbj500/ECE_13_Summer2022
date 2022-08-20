@@ -15,7 +15,7 @@
 #include "Oled.h"
 
 // **** Set macros and preprocessor directives ****
-#define WINDOW_SIZE 3 
+#define WINDOW_SIZE 5 
 // **** Declare any datatypes here ****
 typedef struct AdcResult{
     uint8_t event;
@@ -65,27 +65,29 @@ int main(void)
     float percent = 0;
     char r[3];
     char p[2];
-  printf("Welcome to CRUZID's lab4 part3 (bounce_adc).  Compiled on %s %s.\n",__TIME__,__DATE__);
+  printf("Welcome to bkhadka's lab4 part3 (bounce_adc).  Compiled on %s %s.\n",__TIME__,__DATE__);
 
   while(1){
       if(AR.event ==TRUE){
-          OledDrawString("Potentiometer Value");
+          OledDrawString("Potentiometer Value"); //heading
+          
           raw = (ADC1BUF0+ADC1BUF1+ADC1BUF2+ADC1BUF3+ADC1BUF4+ADC1BUF5+ADC1BUF6+ADC1BUF7) / 8;
-          sprintf(r, "%d", raw);
-          //printf("raw1:%s",r[0]);
-          //printf("raw2:%s",r[1]);
-          OledDrawChar(16,15,r[0]);//update OLED with percentage and raw value
+          sprintf(r, "%d", raw);        //set raw value to char string
+          
+          OledDrawChar(16,15,r[0]);     //write out to OLED with each character in raw value
           OledDrawChar(22,15,r[1]);
           OledDrawChar(27,15,r[2]);
           OledDrawChar(32,15,r[3]);
+          
           percent = ((float) raw)/1023 * 100;
-          sprintf(p, "%3.0f", percent);
-          //printf("percent:%s ",p);
-          OledDrawChar(48,15,p[0]);
+          sprintf(p, "%3.0f", percent); //set percent value to char string
+          
+          OledDrawChar(48,15,p[0]);    // write out to OLED with each character in percentage 
           OledDrawChar(54,15,p[1]);
           OledDrawChar(60,15,p[2]);
           OledDrawChar(66,15,'%');
-          OledUpdate();
+          
+          OledUpdate();                 //update OLED
           AR.event == FALSE; //clear ADC event flag
       }
   }

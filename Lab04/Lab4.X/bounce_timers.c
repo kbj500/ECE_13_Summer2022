@@ -64,7 +64,7 @@ int main(void)
     /***************************************************************************************************
      * Your code goes in between this comment and the following one with asterisks.
      **************************************************************************************************/
-    printf("Welcome to CRUZID's lab4 part1 (timers).  Compiled on %s %s.\n", __TIME__, __DATE__); 
+    printf("Welcome to bkhadka's lab4 part1 (timers).  Compiled on %s %s.\n", __TIME__, __DATE__); 
     
     TimerA.timeRemaining = TWO_SECONDS;     //initialize starting times
     TimerB.timeRemaining = THREE_SECONDS;

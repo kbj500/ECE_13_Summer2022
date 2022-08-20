@@ -28,7 +28,7 @@ static int state;
 #define LEFT 1
 #define RIGHT 0
 
-#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
+#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c" /// macros for printing binary numbers
 #define BYTE_TO_BINARY(byte)  \
   (byte & 0x80 ? '1' : '0'), \
   (byte & 0x40 ? '1' : '0'), \
@@ -62,38 +62,38 @@ int main(void)
      **************************************************************************************************/
     
     LEDS_INIT(); // initialize board
-    //TimerS.timeRemaining = 1+ SWITCH_STATES();
     
-    printf("LED START:%d\n",LEDS_GET());
+    
+    //printf("LED START:%d\n",LEDS_GET());
     int l = 1; //set initial LED
     TimerS.timeRemaining = SWITCH_STATES()+1;
-    printf("Welcome to CRUZID's lab4 part2 (bounce_switch).  Compiled on %s %s.\n",__TIME__,__DATE__);				 
+    printf("Welcome to bkhadka's lab4 part2 (bounce_switch).  Compiled on %s %s.\n",__TIME__,__DATE__);				 
 	while(1){
         if(TimerS.event == TRUE)
         {//poll timer events and react if any occur 
         if(l == 0x01){
             state = LEFT;// Reverse direction
-            printf("State set Left\n");
+            //printf("State set Left\n");
         }
         else if(l == 0x80){
             state = RIGHT;// Reverse direction
-            printf("State set Right\n");
+           // printf("State set Right\n");
         }
         if(state == LEFT){
-            printf("\nLED:%d\n",LEDS_GET()); 
-            printf("Binary:\n"BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(LEDS_GET()));
+            //printf("\nLED:%d\n",LEDS_GET()); 
+            //printf("Binary:\n"BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(LEDS_GET()));
             l <<= 1;
             LEDS_SET(l);
-            printf("\nLED SHIFTED LEFT:%d\n",LEDS_GET());
+            //printf("\nLED SHIFTED LEFT:%d\n",LEDS_GET());
             
-             printf("LED SHIFTED LEFT FINAL:%d\n",LEDS_GET());
+             //printf("LED SHIFTED LEFT FINAL:%d\n",LEDS_GET());
         }
         else{
-            printf("\nLED:%d\n",LEDS_GET()); 
-            printf("Binary:\n"BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(LEDS_GET()));
+            //printf("\nLED:%d\n",LEDS_GET()); 
+            //printf("Binary:\n"BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(LEDS_GET()));
             l >>= 1;
             LEDS_SET(l);
-            printf("LED SHIFTED RIGHT:%d\n",LEDS_GET());
+            //printf("LED SHIFTED RIGHT:%d\n",LEDS_GET());
         }
         TimerS.event = FALSE; //clear timer event flag
         

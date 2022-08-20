@@ -18,7 +18,6 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_buttons_template.c</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_ec_template.c</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_timers.c</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Leds_lab04.c</itemPath>
@@ -28,6 +27,9 @@
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/BOARD.c</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Oled.c</itemPath>
       <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/OledDriver.c</itemPath>
+      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/ButtonsTest.c</itemPath>
+      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/Buttons.c</itemPath>
+      <itemPath>/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_buttons.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -78,7 +80,11 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_buttons_template.c"
+      <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/ButtonsTest.c"
+            ex="true"
+            overriding="false">
+      </item>
+      <item path="/Users/bijayakhadka/Documents/ECE_13/bkhadka/Lab04/Lab4.X/bounce_adc.c"
             ex="true"
             overriding="false">
       </item>
