@@ -8,6 +8,7 @@
 #include "Oled.h"
 #include "Buttons.h"
 #include "Adc.h"
+#include "Leds.h"
 
 // Microchip libraries
 #include <xc.h>
@@ -68,6 +69,8 @@ static int et; //elapsed time
 static int m; //mode setting
 static int min;//minute
 static int seconds;//seconds
+static int tl1; //time left during cooking 1
+static int tl2; //time left during cooking 2
 static int temp = START_TEMP; //temperature
 
 static char mo[5] = "Mode:"; //char to hold mode string for display
@@ -202,13 +205,19 @@ void runOvenSM(void)
         et = cft-st;
         TIMER_TICK = 0;
         if(od.state == COOKING){
-            printf("Seconds(cook):%d\n",seconds);
+            if(cft % 5 == 0){
+            //printf("Seconds(cook):%d\n",seconds);
+            //tl1 = ((min*60)+seconds)/8;
+            //l2 = ((min*60)+seconds)%8;
             if(seconds != 0 || min != 0){
                 if(seconds == 0){
                     min--;
-                    seconds = 59;
+                    seconds = 60;
                 }
                 seconds--;
+                if(((tl1-((min*60)+seconds))%tl2)==0){
+                    LEDS_SET((LEDS_GET()<<1));
+                }
             }
             else{
                 od.state = RESET_PENDING;
@@ -233,6 +242,7 @@ void runOvenSM(void)
                 od.state == RESET_PENDING; 
             }*/
             printf("Seconds(c):%d\n",seconds);
+            }
         }
     }
     if(ButtonResult & BUTTON_EVENT_3DOWN) {
@@ -283,6 +293,9 @@ void runOvenSM(void)
     
     if(ButtonResult & BUTTON_EVENT_4DOWN){
         od.state = COOKING; 
+        tl1 = ((min*60)+seconds);
+        tl2 = ((min*60)+seconds)/8;
+        LEDS_SET(0xFF);
     }
     
     updateOvenOLED(od);
@@ -331,6 +344,7 @@ int main()
     //initialize state machine (and anything else you need to init) here
     OledInit();
     AdcInit();
+    LEDS_INIT();
     od.state = SETUP;
     strcpy(od.cm,MODE_LIST[m]);
     while (1){
@@ -338,7 +352,7 @@ int main()
         
                         //check for events
     if(ButtonResult || adcC){   //check for events: button, adc, state
-        runOvenSM();                                // on event, run runOvenSM()
+        runOvenSM();    
     }   
     if(od.state == SELECTOR_CHANGE_PENDING){// if state is selector change pending 
         runOvenSM(); 
@@ -349,7 +363,7 @@ int main()
     //ButtonResult = 0;   // clear event flags
     //adcC = 0;
     
-        
+    
         
     };
 }
