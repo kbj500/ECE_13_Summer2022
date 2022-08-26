@@ -20,9 +20,11 @@
 // Set a macro for resetting the timer, makes the code a little clearer.
 #define TIMER_2HZ_RESET() (TMR1 = 0)
 
-#define LONG_PRESS 3
+#define LONG_PRESS 2
 
 #define START_TEMP 300
+
+#define HERTZ_SECOND 5
 
 #define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c" /// macros for printing binary numbers
 #define BYTE_TO_BINARY(byte)  \
@@ -58,7 +60,7 @@ enum MODE{
 // **** Define any module-level, global, or external variables here ****
 static uint8_t ButtonResult;
 static OvenData od;
-static int sp = 12;
+static int sp = 12; //position of > 
 static uint8_t adcC;
 static uint32_t adcV;
 static int TIMER_TICK;
@@ -69,6 +71,7 @@ static int et; //elapsed time
 static int m; //mode setting
 static int min;//minute
 static int seconds;//seconds
+static int cooktick;// counter for timer tick for cooking
 static int tl1; //time left during cooking 1
 static int tl2; //time left during cooking 2
 static int temp = START_TEMP; //temperature
@@ -90,6 +93,104 @@ void updateOvenOLED(OvenData ovenData){
     // create starting screen
           //heading
           OledClear(0);
+          
+          OledDrawChar(3,1,'=');
+          OledDrawChar(6,1,'=');
+          OledDrawChar(9,1,'=');
+          OledDrawChar(12,1,'=');
+          OledDrawChar(15,1,'=');
+          OledDrawChar(18,1,'=');
+          OledDrawChar(21,1,'=');
+          OledDrawChar(24,1,'=');
+          OledDrawChar(27,1,'=');
+          OledDrawChar(30,1,'=');
+          OledDrawChar(33,1,'=');
+          
+          OledDrawChar(1,2,';');
+          //OledDrawChar(1,4,'|');
+          OledDrawChar(1,5,'|');
+          OledDrawChar(1,6,'|');
+          OledDrawChar(1,7,'|');
+          OledDrawChar(1,8,'|');
+          OledDrawChar(1,9,'|');
+          
+          OledDrawChar(36,2,';');
+          //OledDrawChar(36,3,'|');
+          //OledDrawChar(36,4,'|');
+          OledDrawChar(36,5,'|');
+          OledDrawChar(36,6,'|');
+          OledDrawChar(36,7,'|');
+          OledDrawChar(36,8,'|');
+          OledDrawChar(36,9,'|');
+          
+          OledDrawChar(5,10,'(');
+          OledDrawChar(10,10,'}');
+          
+          
+          OledDrawChar(15,10,'(');
+          OledDrawChar(20,10,'}');
+          
+          
+          OledDrawChar(27,10,'{');
+          OledDrawChar(32,10,')');
+          
+          if(od.state == COOKING){
+          OledDrawChar(1,17,'|');
+          OledDrawChar(5,20,'[');
+          OledDrawChar(9,17,'-');
+          OledDrawChar(12,17,'-');
+          OledDrawChar(15,17,'-');
+          OledDrawChar(18,17,'-');
+          OledDrawChar(21,17,'-');
+          OledDrawChar(24,17,'-');
+          OledDrawChar(27,17,'-');
+          OledDrawChar(31,20,']');
+          OledDrawChar(36,17,'|');
+          
+          OledDrawChar(9,21,'~');
+          OledDrawChar(12,21,'~');
+          OledDrawChar(15,21,'~');
+          OledDrawChar(18,21,'~');
+          OledDrawChar(21,21,'~');
+          OledDrawChar(24,21,'~');
+          OledDrawChar(27,21,'~');
+              
+          }
+          else{
+          OledDrawChar(1,17,'|');
+          OledDrawChar(5,17,'.');
+          OledDrawChar(9,17,'=');
+          OledDrawChar(12,17,'=');
+          OledDrawChar(15,17,'=');
+          OledDrawChar(18,17,'=');
+          OledDrawChar(21,17,'=');
+          OledDrawChar(24,17,'=');
+          OledDrawChar(27,17,'=');
+          OledDrawChar(31,17,'.');
+          OledDrawChar(36,17,'|');
+          }
+          
+          OledDrawChar(1,24,'|');
+          OledDrawChar(5,24,'_');
+          OledDrawChar(9,24,'_');
+          OledDrawChar(12,24,'_');
+          OledDrawChar(15,24,'_');
+          OledDrawChar(18,24,'_');
+          OledDrawChar(21,24,'_');
+          OledDrawChar(24,24,'_');
+          OledDrawChar(27,24,'_');
+          OledDrawChar(31,24,'_');
+          OledDrawChar(36,24,'|');
+  
+          
+          
+          /*
+
+            ;===========;   
+            | (} (}  {) |     
+            | .=======. |      
+            | `-------' |  
+            `-----------'    */     
           
           OledDrawChar(62,1,mo[0]);     //write out to OLED with each character in mode
           OledDrawChar(68,1,mo[1]);
@@ -168,76 +269,52 @@ void runOvenSM(void)
 {
     //write your SM logic here.
     //check timer ticks
-    if(sp == 12){
-        if(adcC){
-           
-            
-            //printf("\nAdcRead() int:%d\n",AdcRead());
-            //printf("AdcRead() binary:\n "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(AdcRead()));
+    if(adcC){
+        if(sp == 12){
             adcV = (((uint32_t)AdcRead())>>2)+1;
             min = adcV/60;
             //printf("Minutes:%d\n",min);
             seconds = adcV % 60;
-            
-            //printf("Seconds:%d\n",seconds);
+            updateOvenOLED(od);
+        }
+        else{
+            adcV = (((uint32_t)AdcRead())>>2)+300;
             //printf("\nadcV:%d\n",adcV);
-            //printf("adcV binary:\n "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(adcV));
-            
+            temp = adcV;
+            updateOvenOLED(od);
         }
-    }
-    else{
-        if(adcC){
-        adcV = (((uint32_t)AdcRead())>>2)+300;
-        //printf("\nadcV:%d\n",adcV);
-        temp = adcV;
-        }
-        
     }
     if(TIMER_TICK){
         cft++;
         et = cft-st;
+        cooktick = 1;
         TIMER_TICK = 0;
-        if(od.state == COOKING || od.state == RESET_PENDING){
-            if(cft % 5 == 0){
-            //printf("Seconds(cook):%d\n",seconds);
-            //tl1 = ((min*60)+seconds)/8;
-            //l2 = ((min*60)+seconds)%8;
-            if(seconds != 0 || min != 0){
-                if(seconds == 0){
-                    min--;
-                    seconds = 60;
-                }
-                seconds--;
-                if(((tl1-((min*60)+seconds))%tl2)==0){
-                    LEDS_SET((LEDS_GET()<<1));
-                }
-            }
-            else{
-                od.state = RESET_PENDING;
-                if(cft % 2 == 0){
-                    OledSetDisplayInverted();
-                    printf("invert");
-                }
-                else{
-                    OledSetDisplayNormal();
-                    printf("normal");
-                }
-                //OledSetDisplayNormal();
-            }
-            updateOvenOLED(od);
-            }
-            
+    }
+    switch(od.state) {
+
+   case SETUP  :
+        OledSetDisplayNormal();
+        //adcV = (((uint32_t)AdcRead())>>2)+1;
+        //min = adcV/60;
+        //seconds = adcV % 60;  
+        if(ButtonResult & BUTTON_EVENT_3DOWN) {
+            st = cft;
+            et = cft-st;
+            od.state = SELECTOR_CHANGE_PENDING;
+            //printf("\nst:%d\n", st);
+
+           //printf("\ncft(down):%d\n", cft);
         }
-    }
-    if(ButtonResult & BUTTON_EVENT_3DOWN) {
-        st = cft;
-        et = cft-st;
-        od.state = SELECTOR_CHANGE_PENDING;
-        //printf("\nst:%d\n", st);
-        
-       //printf("\ncft(down):%d\n", cft);
-    }
-    if(ButtonResult & BUTTON_EVENT_3UP){ 
+        if(ButtonResult & BUTTON_EVENT_4DOWN){
+            od.state = COOKING; 
+            tl1 = ((min*60)+seconds);
+            tl2 = ((min*60)+seconds)/8;
+            LEDS_SET(0xFF);
+        }
+        break; 
+	
+   case SELECTOR_CHANGE_PENDING  :
+       if(ButtonResult & BUTTON_EVENT_3UP){ 
         
             //printf("\ncft(Up):%d\n", cft);
              //printf("\net:%d\n", et);
@@ -253,6 +330,7 @@ void runOvenSM(void)
                         m = 0;
                         strcpy(od.cm,MODE_LIST[m]);
                         updateOvenOLED(od);
+                        
                     }
                  }
                  else{
@@ -260,12 +338,14 @@ void runOvenSM(void)
                      if(sp>12){
                            sp = 12;
                            updateOvenOLED(od);
+                           
                            //printf("sp(12):%d\n",sp);
 
                        }
                        else{
                            sp = 24;
                            updateOvenOLED(od);
+                           
                            //printf("sp(24):%d\n",sp);
 
                        }
@@ -273,26 +353,55 @@ void runOvenSM(void)
 
                  }
              od.state = SETUP;
-    }
-    
-    if(ButtonResult & BUTTON_EVENT_4DOWN){
-        if(od.state == SETUP){
-            od.state = COOKING; 
-            tl1 = ((min*60)+seconds);
-            tl2 = ((min*60)+seconds)/8;
-            LEDS_SET(0xFF);
         }
-        else if(od.state == RESET_PENDING){
+       
+        break; 
+      
+   case COOKING  :
+       if(cooktick){
+       if(cft % HERTZ_SECOND == 0){
+            //printf("Seconds(cook):%d\n",seconds);
+            if(seconds != 0 || min != 0){
+                if(seconds == 0){
+                    min--;
+                    seconds = 60;
+                }
+                seconds--;
+                if(((tl1-((min*60)+seconds))%tl2)==0){
+                    LEDS_SET((LEDS_GET()<<1));
+                }
+                else if(seconds < 8){
+                    LEDS_SET((LEDS_GET()<<3));
+                }
+            }
+            else{
+                od.state = RESET_PENDING;
+            }
+            updateOvenOLED(od);
+            }
+       cooktick = 0;
+       break;
+       }
+       break;
+      
+   case RESET_PENDING  :
+       if(ButtonResult & BUTTON_EVENT_4DOWN){
+           od.state = SETUP;
+           adcV = (((uint32_t)AdcRead())>>2)+1;
+           min = adcV/60;
+           seconds = adcV % 60;
+        }
+       else if(cft % 2 == 0){
+            OledSetDisplayInverted();
+            //printf("invert");
+        }
+        else{
             OledSetDisplayNormal();
-            od.state = SETUP;
-            adcV = (((uint32_t)AdcRead())>>2)+1;
-            min = adcV/60;
-            seconds = adcV % 60;  
+            //printf("normal");
         }
+      break; 
     }
-    
     updateOvenOLED(od);
-    
 }
 
 
@@ -353,8 +462,7 @@ int main()
     if(od.state == SETUP || od.state == COOKING || od.state == RESET_PENDING){ // if state is setup, cooking, reset pending
         runOvenSM(); 
     }
-    //ButtonResult = 0;   // clear event flags
-    //adcC = 0;
+       // clear event flags
     
     
         
