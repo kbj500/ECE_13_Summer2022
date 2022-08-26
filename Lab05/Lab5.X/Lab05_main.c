@@ -123,7 +123,7 @@ void updateOvenOLED(OvenData ovenData){
           
           sprintf(ati, "%d", min); //set minute value to char string
           sprintf(ati+strlen(ati),"%d",seconds); //set seconds value to char string
-          printf("ati:%s",ati);
+          //printf("ati:%s",ati);
           if(seconds < 10){
           OledDrawChar(100,12,ati[0]);
           OledDrawChar(106,12,':');
@@ -168,13 +168,6 @@ void runOvenSM(void)
 {
     //write your SM logic here.
     //check timer ticks
-    if(od.state == RESET_PENDING){
-        od.state = SETUP;
-        
-        adcV = (((uint32_t)AdcRead())>>2)+1;
-        min = adcV/60;
-        seconds = adcV % 60;
-    }
     if(sp == 12){
         if(adcC){
            
@@ -183,10 +176,10 @@ void runOvenSM(void)
             //printf("AdcRead() binary:\n "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(AdcRead()));
             adcV = (((uint32_t)AdcRead())>>2)+1;
             min = adcV/60;
-            printf("Minutes:%d\n",min);
+            //printf("Minutes:%d\n",min);
             seconds = adcV % 60;
             
-            printf("Seconds:%d\n",seconds);
+            //printf("Seconds:%d\n",seconds);
             //printf("\nadcV:%d\n",adcV);
             //printf("adcV binary:\n "BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(adcV));
             
@@ -195,7 +188,7 @@ void runOvenSM(void)
     else{
         if(adcC){
         adcV = (((uint32_t)AdcRead())>>2)+300;
-        printf("\nadcV:%d\n",adcV);
+        //printf("\nadcV:%d\n",adcV);
         temp = adcV;
         }
         
@@ -204,7 +197,7 @@ void runOvenSM(void)
         cft++;
         et = cft-st;
         TIMER_TICK = 0;
-        if(od.state == COOKING){
+        if(od.state == COOKING || od.state == RESET_PENDING){
             if(cft % 5 == 0){
             //printf("Seconds(cook):%d\n",seconds);
             //tl1 = ((min*60)+seconds)/8;
@@ -221,42 +214,33 @@ void runOvenSM(void)
             }
             else{
                 od.state = RESET_PENDING;
+                if(cft % 2 == 0){
+                    OledSetDisplayInverted();
+                    printf("invert");
+                }
+                else{
+                    OledSetDisplayNormal();
+                    printf("normal");
+                }
+                //OledSetDisplayNormal();
             }
             updateOvenOLED(od);
-            /*
-            if(seconds != 0 || min != 0){
-                if(seconds = 0){
-                    printf("Minutes(cs):%d\n",min);
-                    min--;
-                    seconds = 59;
-                }
-            printf("Minutes(c):%d\n",min);
-                
-            printf("Seconds(c1b):%d\n",seconds);
-               seconds--; 
-            printf("Seconds(c1a):%d\n",seconds);
-               updateOvenOLED(od);
-               
             }
-            else{
-                od.state == RESET_PENDING; 
-            }*/
-            printf("Seconds(c):%d\n",seconds);
-            }
+            
         }
     }
     if(ButtonResult & BUTTON_EVENT_3DOWN) {
         st = cft;
         et = cft-st;
         od.state = SELECTOR_CHANGE_PENDING;
-        printf("\nst:%d\n", st);
+        //printf("\nst:%d\n", st);
         
-       printf("\ncft(down):%d\n", cft);
+       //printf("\ncft(down):%d\n", cft);
     }
     if(ButtonResult & BUTTON_EVENT_3UP){ 
         
-            printf("\ncft(Up):%d\n", cft);
-             printf("\net:%d\n", et);
+            //printf("\ncft(Up):%d\n", cft);
+             //printf("\net:%d\n", et);
                  if(et < LONG_PRESS){
                  //printf("\nswitch next mode\n");
                     sp = 12;
@@ -292,10 +276,19 @@ void runOvenSM(void)
     }
     
     if(ButtonResult & BUTTON_EVENT_4DOWN){
-        od.state = COOKING; 
-        tl1 = ((min*60)+seconds);
-        tl2 = ((min*60)+seconds)/8;
-        LEDS_SET(0xFF);
+        if(od.state == SETUP){
+            od.state = COOKING; 
+            tl1 = ((min*60)+seconds);
+            tl2 = ((min*60)+seconds)/8;
+            LEDS_SET(0xFF);
+        }
+        else if(od.state == RESET_PENDING){
+            OledSetDisplayNormal();
+            od.state = SETUP;
+            adcV = (((uint32_t)AdcRead())>>2)+1;
+            min = adcV/60;
+            seconds = adcV % 60;  
+        }
     }
     
     updateOvenOLED(od);
